@@ -6,7 +6,9 @@
   <title>Site Acessível</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="site-page"> <header>
+<body class="site-page">
+
+  <header>
     <h1>Bem-vindo ao Site Acessível</h1>
     <p>Seu portal com foco em inclusão digital e navegação simplificada.</p>
   </header>
@@ -64,6 +66,9 @@
     <p>&copy; 2025 Site Acessível. Todos os direitos reservados. </p>
   </footer>
 
+  <div class="logout-container" id="logout-section-site"> <button class="logout-button" onclick="fazerLogoff()">Sair</button>
+  </div>
+
   <svg style="height: 0; width: 0; position: absolute; overflow: hidden;">
       <filter id="protanopia">
           <feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0 0.558, 0.442, 0, 0, 0 0, 0.242, 0.758, 0, 0 0, 0, 0, 1, 0"/>
@@ -90,6 +95,8 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         console.log('site.html loaded.');
+        // The check for isLoggedIn and redirection is already handled by main-auth.js
+        // via the DOMContentLoaded listener, but keeping this block just in case
         if (sessionStorage.getItem('isLoggedIn') !== 'true') {
             console.log('User not logged in. Redirecting to login.html.');
             navigateTo('login.html');
