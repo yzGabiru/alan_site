@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main>
+    <div class="login-container">
+      <h2>Bem-vindo de volta</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="E-mail" required />
+        <input type="password" id="login-password" placeholder="Senha" required />
+        <button type="submit" class="login-button">Entrar</button>
+      </form>
+      <p id="login-message" style="margin-top: 1rem;"></p>
+      <div class="footer">
+        <p><a href="#" onclick="navigateTo('register.html')">Cadastre-se</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script src="main-auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Aplica o modo alto contraste se o usuário tiver ativado anteriormente
+      if (localStorage.getItem('altoContrasteAtivo') === 'true') {
+          document.body.classList.add('alto-contraste');
+      }
+    });
+  </script>
+</body>
+</html>

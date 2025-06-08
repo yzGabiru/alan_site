@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main>
+    <div class="menu-container" id="main-content-logged-out">
+      <h1>Bem-vindo!</h1>
+      <p>Faça login ou cadastre-se para acessar o conteúdo.</p>
+      <button class="menu-button" onclick="navigateTo('login.html')">Fazer Login</button>
+      <button class="menu-button" onclick="navigateTo('register.html')">Cadastrar-se</button>
+    </div>
+
+    <div class="menu-container oculto" id="main-content-logged-in">
+        <h1>Bem-vindo, Usuário Logado!</h1>
+        <button class="menu-button" onclick="navigateTo('site.html')">Ir para o Site Acessível</button>
+    </div>
+  </main>
+
+  <div class="logout-container oculto" id="logout-section">
+      <button class="logout-button" onclick="fazerLogoff()">Sair</button>
+  </div>
+
+  <script src="main-auth.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          const loggedOutContent = document.getElementById('main-content-logged-out');
+          const loggedInContent = document.getElementById('main-content-logged-in');
+          const logoutSection = document.getElementById('logout-section');
+
+          if (sessionStorage.getItem('isLoggedIn') === 'true') {
+              loggedOutContent.classList.add('oculto');
+              loggedInContent.classList.remove('oculto');
+              logoutSection.classList.remove('oculto');
+          } else {
+              loggedOutContent.classList.remove('oculto');
+              loggedInContent.classList.add('oculto');
+              logoutSection.classList.add('oculto');
+          }
+      });
+  </script>
+</body>
+</html>
