@@ -188,10 +188,15 @@ main {
   grid-template-columns: 1fr;
   /* Additional styles for main that apply to login/register/index */
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Reverted back to center */
   min-height: 100vh;
   /* Removed background-color from here */
   transition: all 0.3s ease;
+}
+
+/* New rule to apply flex-start only to site.html */
+body.site-page main {
+  align-items: flex-start;
 }
 
 @media (min-width: 768px) {
