@@ -28,6 +28,11 @@ body {
   padding: 0;
 }
 
+/* --- ADICIONADO: Ajuste para a página 'site.html' para evitar que a barra de acessibilidade cubra o título --- */
+body.site-page {
+  padding-top: 70px; /* Ajuste este valor conforme a altura real da sua barra de acessibilidade */
+}
+
 /* ============================ */
 /* MODO ALTO CONTRASTE ESTILO ICB */
 /* ============================ */
@@ -195,7 +200,7 @@ body.alto-contraste .acessibilidade-bar select {
 
 main {
   flex: 1;
-  padding-top: 5rem;
+  padding-top: 5rem; /* Este padding-top será sobrescrito pelo body.site-page no site.html */
   padding-left: 1rem;
   padding-right: 1rem;
   max-width: 1200px;
@@ -213,6 +218,7 @@ main {
 body.site-page main {
   align-items: flex-start;
   min-height: auto; /* Remove min-height para site.html */
+  padding-top: 0; /* Remove o padding-top padrão do main para site.html */
 }
 
 @media (max-width: 767px) {
@@ -221,6 +227,11 @@ body.site-page main {
         padding-left: 0.5rem; /* Diminui o padding lateral para telas menores */
         padding-right: 0.5rem; /* Diminui o padding lateral para telas menores */
         min-height: calc(100vh - 4rem); /* Mantém o ajuste para telas menores */
+    }
+
+    /* --- ADICIONADO: Ajuste para a página 'site.html' em mobile --- */
+    body.site-page {
+      padding-top: 130px; /* Aumenta o padding-top em mobile, pois a barra de acessibilidade pode ser mais alta */
     }
 
     .acessibilidade-bar {
@@ -318,6 +329,11 @@ body.site-page main {
 @media (min-width: 768px) {
     main {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        padding-top: 5rem; /* Volta o padding-top padrão do main para desktop */
+    }
+    /* --- ADICIONADO: Ajuste para a página 'site.html' em desktop --- */
+    body.site-page {
+      padding-top: 70px; /* Mantém o padding-top específico para desktop */
     }
 }
 
