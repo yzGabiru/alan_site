@@ -78,5 +78,5 @@ Esse projeto é ideal para aprender conceitos de desenvolvimento full stack mode
 - Gerenciamento de banco de dados em nuvem
 - Criptografia de senhas
 - Integração entre diferentes serviços na nuvem
-
+ ?
 ---
