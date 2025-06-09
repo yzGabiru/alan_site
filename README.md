@@ -62,8 +62,8 @@ Essa integração permite um fluxo de trabalho moderno, rápido e confiável par
 
 ## ✅ Tecnologias Usadas
 
-- **Frontend**: HTML/CSS/JavaScript (ou framework usado, se houver)
-- **Backend**: Node.js / Flask (ou outro, se aplicável)
+- **Frontend**: HTML/CSS/JavaScript 
+- **Backend**:Python com framework Flask 
 - **Banco de Dados**: PostgreSQL (via Supabase)
 - **Hospedagem Backend**: Render
 - **Hospedagem Frontend**: Vercel
