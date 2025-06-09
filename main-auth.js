@@ -302,14 +302,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const path = window.location.pathname;
 
-    // Lógica de proteção para a página principal (index.html)
+    // Lógica de proteção para a página principal (index.html) - REMOVIDO REDIRECIONAMENTO FORÇADO
+    // Apenas ajusta a visibilidade do conteúdo baseado no status de login
     if (path.endsWith('/') || path.endsWith('/index.html')) {
-        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
-            console.log('Usuário não logado. Redirecionando para login.html.');
-            navigateTo('login.html');
-            return;
+        const loggedOutContent = document.getElementById('main-content-logged-out');
+        const loggedInContent = document.getElementById('main-content-logged-in');
+        const logoutSection = document.getElementById('logout-section');
+
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            loggedOutContent.classList.add('oculto');
+            loggedInContent.classList.remove('oculto');
+            logoutSection.classList.remove('oculto');
+            console.log('Usuário logado. Mostrando conteúdo de usuário logado em index.html.');
         } else {
-            console.log('Usuário logado. Permanecendo em index.html.');
+            loggedOutContent.classList.remove('oculto');
+            loggedInContent.classList.add('oculto');
+            logoutSection.classList.add('oculto');
+            console.log('Usuário não logado. Mostrando conteúdo de não logado em index.html.');
         }
     }
     // Lógica de proteção para a página de login (login.html)
