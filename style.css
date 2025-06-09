@@ -9,9 +9,14 @@
   --cor-destaque: #dd3333;
 }
 
+/* Adiciona box-sizing globalmente para melhor controle de layout */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   font-size: var(--fonte-base);
-  background-color: var(--cor-primaria);
+  background-color: var(--cor-primaria); /* Changed from var(--fundo) to var(--cor-primaria) */
   color: var(--texto);
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -140,8 +145,10 @@ body.alto-contraste .acessibilidade-bar select {
   font-size: 1.1rem;
   min-height: 48px;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem; /* Ajustado para um espaçamento menor */
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%; /* Garante que ocupe 100% da largura */
+  box-sizing: border-box; /* Adicionado para evitar transbordamento */
 }
 
 .acessibilidade-bar > div {
@@ -149,6 +156,8 @@ body.alto-contraste .acessibilidade-bar select {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem;
+    justify-content: center; /* Centraliza os itens dentro dos divs da barra */
+    width: 100%; /* Ocupa a largura total para quebrar a linha corretamente */
 }
 
 .acessibilidade-bar button,
@@ -162,6 +171,13 @@ body.alto-contraste .acessibilidade-bar select {
   background-color: #f0f0f0;
   color: #333;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  flex-grow: 1; /* Permite que os botões cresçam para preencher o espaço */
+  min-width: 80px; /* Um mínimo razoável para botões */
+}
+
+.acessibilidade-bar button.btn-reset {
+  flex-basis: auto; /* Permite que o botão "Tamanho Padrão" se ajuste melhor */
+  min-width: unset; /* Remove min-width específico para este botão, se necessário */
 }
 
 .acessibilidade-bar button:hover,
@@ -174,71 +190,74 @@ body.alto-contraste .acessibilidade-bar select {
     font-size: 1rem;
     margin-right: 0.25rem;
     color: #333;
+    white-space: nowrap; /* Impede que a label quebre a linha */
 }
 
 main {
   flex: 1;
-  padding-top: 5rem; /* Adjusted for fixed accessibility bar */
+  padding-top: 5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto; /* Centraliza o conteúdo principal */
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr; /* Default to single column for mobile */
+  grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem); /* Ajustado para considerar a altura da barra de acessibilidade */
   transition: all 0.3s ease;
 }
 
 /* New rule to apply flex-start only to site.html */
 body.site-page main {
   align-items: flex-start;
+  min-height: auto; /* Remove min-height para site.html */
 }
 
 @media (max-width: 767px) {
     main {
-        padding-top: 5rem; /* Ensure enough space below the fixed accessibility bar */
-        padding-left: 1rem;
-        padding-right: 1rem;
+        padding-top: 5rem; /* Garante espaço suficiente abaixo da barra fixa */
+        padding-left: 0.5rem; /* Diminui o padding lateral para telas menores */
+        padding-right: 0.5rem; /* Diminui o padding lateral para telas menores */
+        min-height: calc(100vh - 4rem); /* Mantém o ajuste para telas menores */
     }
 
     .acessibilidade-bar {
-        padding: 0.5rem 0.5rem; /* Slightly less padding on very small screens */
-        justify-content: center; /* Center items if they wrap */
-        text-align: center;
+        padding: 0.25rem; /* Menor padding para telas muito pequenas */
+        flex-direction: column; /* Empilha os blocos de botões */
     }
 
     .acessibilidade-bar > div {
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.25rem; /* Espaço entre os blocos de botões */
     }
 
     .acessibilidade-bar button,
     .acessibilidade-bar select {
-        width: auto; /* Allow buttons to size naturally */
-        flex-grow: 1; /* Allow buttons to grow to fill space */
-        min-width: unset; /* Remove min-width to allow shrinking */
-        font-size: 0.9rem; /* Slightly smaller font for buttons */
-        padding: 0.4rem 0.6rem;
+        font-size: 0.85rem; /* Fontes menores para caber mais */
+        padding: 0.4rem 0.5rem;
+        min-width: unset; /* Permite que os botões fiquem menores */
+        flex-grow: 1; /* Ainda permite que cresçam */
+    }
+
+    .acessibilidade-bar label {
+      font-size: 0.9rem;
     }
 
     header {
-        padding: 1.5rem 1rem; /* Smaller padding for mobile header */
+        padding: 1.5rem 0.5rem; /* Menor padding para o cabeçalho */
     }
 
     header h1 {
-        font-size: 2rem; /* Smaller font for mobile header */
+        font-size: 2rem;
     }
 
     header p {
-        font-size: 1rem; /* Smaller font for mobile header description */
+        font-size: 1rem;
     }
 
     nav {
-        flex-direction: column; /* Stack navigation links vertically */
+        flex-direction: column; /* Links de navegação empilhados */
         gap: 0.5rem;
         padding: 0.5rem 0;
     }
@@ -246,15 +265,15 @@ body.site-page main {
     nav a {
         padding: 0.8rem 1rem;
         text-align: center;
-        width: calc(100% - 2rem); /* Full width with padding */
+        width: calc(100% - 2rem); /* Ocupa a largura total com padding */
     }
 
     section {
-        padding: 1.5rem; /* Smaller padding for sections */
+        padding: 1.5rem; /* Menor padding para as seções */
     }
 
     section h2 {
-        font-size: 1.6rem; /* Smaller font for section headings */
+        font-size: 1.6rem;
         margin-bottom: 1rem;
     }
 
@@ -262,7 +281,7 @@ body.site-page main {
     form textarea,
     input,
     textarea {
-        width: 100%; /* Full width for form inputs */
+        width: 100%; /* Largura total para inputs */
         padding: 0.7rem;
     }
 
@@ -270,7 +289,7 @@ body.site-page main {
     .login-button,
     .register-button,
     .menu-button {
-        width: 100%; /* Full width for buttons */
+        width: 100%; /* Largura total para botões */
         padding: 0.8rem;
         font-size: 1rem;
     }
@@ -278,13 +297,21 @@ body.site-page main {
     .login-container,
     .register-container,
     .menu-container {
-        padding: 1.5rem; /* Smaller padding for auth containers */
-        margin: 1rem; /* Add some margin on smaller screens */
+        padding: 1.5rem; /* Menor padding para containers de auth */
+        margin: 1rem 0.5rem; /* Adiciona margem lateral para não colar nas bordas */
     }
 
     .menu-container h1 {
         font-size: 1.8rem;
         margin-bottom: 1.5rem;
+    }
+
+    /* Ajuste para o VLibras plugin em telas menores */
+    [vw] {
+        right: 10px !important;
+        bottom: 10px !important;
+        transform: scale(0.8); /* Reduz o tamanho do plugin */
+        transform-origin: bottom right; /* Garante que a escala seja da borda */
     }
 }
 
@@ -407,7 +434,7 @@ textarea {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
-    width: calc(100% - 1.6rem); /* Adjust width for padding */
+    width: 100%; /* Agora sempre 100% da largura do pai */
     transition: border-color 0.3s ease;
 }
 
@@ -513,11 +540,12 @@ select:focus {
   padding: 2.5rem;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 420px;
+  width: 100%; /* Ajustado para 100% */
+  max-width: 420px; /* Mantém a largura máxima */
   text-align: center;
   background-color: var(--fundo);
   color: var(--texto);
+  margin: 0 auto; /* Garante centralização */
 }
 
 .register-container {
