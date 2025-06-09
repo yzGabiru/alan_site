@@ -11,7 +11,7 @@
 
 body {
   font-size: var(--fonte-base);
-  background-color: var(--cor-primaria); /* Changed from var(--fundo) to var(--cor-primaria) */
+  background-color: var(--cor-primaria);
   color: var(--texto);
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -178,25 +178,114 @@ body.alto-contraste .acessibilidade-bar select {
 
 main {
   flex: 1;
-  padding-top: 5rem;
+  padding-top: 5rem; /* Adjusted for fixed accessibility bar */
   padding-left: 1rem;
   padding-right: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: 2rem;
-  grid-template-columns: 1fr;
-  /* Additional styles for main that apply to login/register/index */
+  grid-template-columns: 1fr; /* Default to single column for mobile */
   justify-content: center;
-  align-items: center; /* Reverted back to center */
+  align-items: center;
   min-height: 100vh;
-  /* Removed background-color from here */
   transition: all 0.3s ease;
 }
 
 /* New rule to apply flex-start only to site.html */
 body.site-page main {
   align-items: flex-start;
+}
+
+@media (max-width: 767px) {
+    main {
+        padding-top: 5rem; /* Ensure enough space below the fixed accessibility bar */
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .acessibilidade-bar {
+        padding: 0.5rem 0.5rem; /* Slightly less padding on very small screens */
+        justify-content: center; /* Center items if they wrap */
+        text-align: center;
+    }
+
+    .acessibilidade-bar > div {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    .acessibilidade-bar button,
+    .acessibilidade-bar select {
+        width: auto; /* Allow buttons to size naturally */
+        flex-grow: 1; /* Allow buttons to grow to fill space */
+        min-width: unset; /* Remove min-width to allow shrinking */
+        font-size: 0.9rem; /* Slightly smaller font for buttons */
+        padding: 0.4rem 0.6rem;
+    }
+
+    header {
+        padding: 1.5rem 1rem; /* Smaller padding for mobile header */
+    }
+
+    header h1 {
+        font-size: 2rem; /* Smaller font for mobile header */
+    }
+
+    header p {
+        font-size: 1rem; /* Smaller font for mobile header description */
+    }
+
+    nav {
+        flex-direction: column; /* Stack navigation links vertically */
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    nav a {
+        padding: 0.8rem 1rem;
+        text-align: center;
+        width: calc(100% - 2rem); /* Full width with padding */
+    }
+
+    section {
+        padding: 1.5rem; /* Smaller padding for sections */
+    }
+
+    section h2 {
+        font-size: 1.6rem; /* Smaller font for section headings */
+        margin-bottom: 1rem;
+    }
+
+    form input[type="text"],
+    form textarea,
+    input,
+    textarea {
+        width: 100%; /* Full width for form inputs */
+        padding: 0.7rem;
+    }
+
+    form button[type="submit"],
+    .login-button,
+    .register-button,
+    .menu-button {
+        width: 100%; /* Full width for buttons */
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    .login-container,
+    .register-container,
+    .menu-container {
+        padding: 1.5rem; /* Smaller padding for auth containers */
+        margin: 1rem; /* Add some margin on smaller screens */
+    }
+
+    .menu-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 @media (min-width: 768px) {
@@ -318,7 +407,7 @@ textarea {
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 1rem;
-    width: calc(100% - 1.6rem);
+    width: calc(100% - 1.6rem); /* Adjust width for padding */
     transition: border-color 0.3s ease;
 }
 
@@ -330,7 +419,6 @@ select:focus {
 }
 
 form button[type="submit"],
-.login-button,
 .login-button,
 .register-button,
 .menu-button {
